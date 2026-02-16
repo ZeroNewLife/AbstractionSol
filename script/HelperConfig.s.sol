@@ -15,6 +15,7 @@ contract HelperConfig is Script {
     uint256 private constant ZKSYNC_CHAINID = 300;
     uint256 private constant LOCAL_CHAINID = 31337;
     address constant BURNER_WALLET = 0xD8961597b7324701211137eeDfdc2892D845c1e8;
+    address constant ANVIL_DEFAULT_ACCOUNT = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
 
     NetworkConfig public localNetworkConfig;
     mapping(uint256 chainId => NetworkConfig) public networkConfigs;
@@ -49,5 +50,7 @@ contract HelperConfig is Script {
         if (localNetworkConfig.account != address(0)) {
             return localNetworkConfig;
         }
+
+        return NetworkConfig({entryPoint: address(0), account: ANVIL_DEFAULT_ACCOUNT});
     }
 }
